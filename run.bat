@@ -4,6 +4,8 @@ rem Update FACEFUSION_ENV_NAME if your Conda env name is different.
 setlocal
 
 cd /d %~dp0
+set "OUTPUT=W:\Deepfakes\faceoutput"
+
 set "FACEFUSION_ENV_NAME=facefusion"
 set "GRADIO_SERVER_NAME=0.0.0.0"
 set "GRADIO_SERVER_PORT=7860"
@@ -21,6 +23,7 @@ if errorlevel 1 (
 )
 
 echo Starting FaceFusion server on http://0.0.0.0:%GRADIO_SERVER_PORT%
-python facefusion.py run --open-browser --execution-device-ids 0
+python facefusion.py run --open-browser --execution-device-ids 0 --output-path %OUTPUT% --execution-providers cuda
+explorer.exe %OUTPUT%
 
 endlocal
